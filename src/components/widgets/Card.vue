@@ -1,10 +1,12 @@
 <template>
-  <div class="app-card"><slot></slot></div>
+  <draggable-box><div class="app-card"><slot></slot></div></draggable-box>
 </template>
 
 <script>
+import DraggableBox from '@/components/widgets/DraggableBox'
+
 export default {
-  
+  components: { DraggableBox }
 }
 </script>
 
