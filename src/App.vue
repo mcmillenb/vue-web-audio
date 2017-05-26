@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="green lighten-4">
     <div class="container">
       <component 
         v-for="node in nodes" 
@@ -11,7 +11,7 @@
 
       <div class="add-node">
         <v-menu offset-y>
-          <v-btn primary dark slot="activator">Add Node</v-btn>
+          <v-btn primary light slot="activator">Add Node</v-btn>
           <v-list>
             <v-list-item 
               v-for="name in nodeNames" 
@@ -62,7 +62,6 @@ export default {
 
 <style>
 body {
-  background-color: #efefef;
   font-family: arial;
 }
 

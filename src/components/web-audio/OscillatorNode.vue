@@ -1,11 +1,11 @@
 <template>
   <node-wrapper :audio-node="audioNode">
     <div class="options">
-      <v-text-field label="frequency" type="number" v-model.number="frequency">
+      <v-text-field label="frequency" type="number" v-model.number="frequency" dark>
       </v-text-field>
-      <v-text-field label="detune" type="number" v-model.number="detune">
+      <v-text-field label="detune" type="number" v-model.number="detune" dark>
       </v-text-field>
-      <v-select label="type" type="text" v-model="type" :items="typeOpts">
+      <v-select label="type" type="text" v-model="type" :items="typeOpts" dark>
       </v-select>
     </div>
   </node-wrapper>

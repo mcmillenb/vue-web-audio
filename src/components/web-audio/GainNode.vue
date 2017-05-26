@@ -1,7 +1,7 @@
 <template>
   <node-wrapper :audio-node="audioNode">
     <div class="options">
-      <v-text-field label="gain" type="number" :min="0" :max="100" v-model.number="gain">
+      <v-text-field label="gain" type="number" :min="0" :max="100" v-model.number="gain" dark>
       </v-text-field>
     </div>
   </node-wrapper>

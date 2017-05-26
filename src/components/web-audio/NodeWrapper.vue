@@ -3,7 +3,7 @@
     <h5>{{ audioNode.type }} (ID: {{ audioNode.id }})</h5>
     <v-divider></v-divider>
     <slot></slot>
-    <v-select label="out" type="text" v-model="destination" :items="items">
+    <v-select label="out" type="text" v-model="destination" :items="items" dark>
     </v-select>
   </app-card>
 </template>
