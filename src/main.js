@@ -11,6 +11,7 @@ Vue.prototype.$audio = new (window.AudioContext || window.webkitAudioContext)()
 
 // register widgets
 Vue.component('app-card', require('@/components/widgets/Card'))
+Vue.component('wg-dial', require('@/components/widgets/Dial'))
 
 /* eslint-disable no-new */
 new Vue({
