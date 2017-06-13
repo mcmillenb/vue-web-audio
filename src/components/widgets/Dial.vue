@@ -18,15 +18,15 @@ export default {
       context: null,
       requestAnimationFrame: null,   
       tween: 0,
+      fillVal: this.value,
     }
   },
   methods: {
     drawArc() {
-      let { context, size, value, tween, min, max } = this;
+      let { context, size, fillVal, tween, min, max } = this;
 
-      let incr = Math.ceil(Math.abs((value - tween) / 8)); 
-      console.log(value, tween, incr);
-      tween = (tween < value) ? tween + incr : tween - incr;
+      let incr = Math.ceil(Math.abs((fillVal - tween) / 8)); 
+      tween = (tween < fillVal) ? tween + incr : tween - incr;
       let percent = tween / (max - min);
       let start = Math.PI / 2;
       let end = Math.PI * 2 * percent + Math.PI / 2;
@@ -38,11 +38,30 @@ export default {
       context.strokeStyle = "#03A9F4";
       context.stroke();
 
-      if (tween !== value) {
+      if (tween !== fillVal) {
         this.tween = tween;
         this.requestAnimationFrame.call(window, this.drawArc);
       }
     },
+    startDrag(event) {
+      if (event.target === this.$refs.canvas) {      
+        window.addEventListener('mousemove', this.dragValue);
+      }
+    },
+    stopDrag(event) {
+      window.removeEventListener('mousemove', this.dragValue);
+    },
+    dragValue(event) {
+      this.fillVal += Math.floor((event.movementX - event.movementY) / 2);
+    }
+  },
+  watch: {
+    fillVal(value) {
+      this.fillVal = Math.max(Math.min(value, this.max), this.min);
+      console.log('hey')
+      this.drawArc();
+      this.$emit('input', this.fillVal);
+    }
   },
   mounted() {
     this.canvas = this.$refs.canvas;
@@ -53,16 +72,19 @@ export default {
                                  window.webkitRequestAnimationFrame || 
                                  window.msRequestAnimationFrame;
     this.drawArc();
+
+    window.addEventListener('mousedown', this.startDrag);
+    window.addEventListener('mouseup', this.stopDrag);
   },
-  watch: {
-    value(value) {
-      this.drawArc();
-    }
+  destroyed() {
+    window.removeEventListener('mousedown', this.startDrag);
+    window.removeEventListener('mouseup', this.stopDrag);
   }
 }
 </script>
 
 <style lang="less">
 .wg-dial {
+  canvas { cursor: ne-resize; }
 }
 </style>
