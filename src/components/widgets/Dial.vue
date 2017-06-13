@@ -53,13 +53,19 @@ export default {
     },
     dragValue(event) {
       this.fillVal += Math.floor((event.movementX - event.movementY) / 2);
+    },
+    updateFillVal(value) {
+      this.fillVal = Math.max(Math.min(value, this.max), this.min);
+      this.drawArc();
+      this.$emit('input', this.fillVal);
     }
   },
   watch: {
     fillVal(value) {
-      this.fillVal = Math.max(Math.min(value, this.max), this.min);
-      this.drawArc();
-      this.$emit('input', this.fillVal);
+      this.updateFillVal(value);
+    },
+    value(value) {
+      this.updateFillVal(value);
     }
   },
   mounted() {
