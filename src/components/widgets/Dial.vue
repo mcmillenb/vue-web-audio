@@ -58,7 +58,6 @@ export default {
   watch: {
     fillVal(value) {
       this.fillVal = Math.max(Math.min(value, this.max), this.min);
-      console.log('hey')
       this.drawArc();
       this.$emit('input', this.fillVal);
     }
