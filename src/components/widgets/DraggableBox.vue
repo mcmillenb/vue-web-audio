@@ -1,10 +1,5 @@
 <template>
-  <div 
-    class="app-draggable-box"
-    @mousedown="mouseDown"
-    @mousemove="mouseMove"
-    @mouseup="mouseUp"
-  >
+  <div class="app-draggable-box">
     <slot></slot>
   </div>
 </template>
@@ -24,6 +19,10 @@ export default {
   },
   methods: {
     mouseDown(e) {
+      if (e.target !== this.$el) {
+        return;
+      }
+
       this.isMouseDown = true;
 
       // get initial mousedown coordinated
@@ -31,7 +30,7 @@ export default {
       let mouseX = e.clientX;
       
       // get element top and left positions
-      let elm = this.$el;
+      let elm = this.$parent.$el;
       let elmY = elm.offsetTop;
       let elmX = elm.offsetLeft;
       
@@ -48,7 +47,7 @@ export default {
         return;
       }
 
-      let elm = this.$el;
+      let elm = this.$parent.$el;
       // get new mouse coordinates
       let newMouseY = e.clientY;
       let newMouseX = e.clientX;
@@ -60,18 +59,31 @@ export default {
       this.moveElm(newElmTop, newElmLeft);
     },
     moveElm(yPos, xPos) {
-      this.$el.style.top = yPos + 'px';
-      this.$el.style.left = xPos + 'px';
+      this.$parent.$el.style.top = yPos - 1 + 'px';
+      this.$parent.$el.style.left = xPos + 'px';
     },
     mouseUp() {
       this.isMouseDown = false;
     }
+  },
+  mounted() {
+    this.$parent.$el.style.position = 'absolute';
+
+    window.addEventListener('mousedown', this.mouseDown);
+    window.addEventListener('mousemove', this.mouseMove);
+    window.addEventListener('mouseup', this.mouseUp);
+  },
+  destroyed() {
+    window.removeEventListener('mousedown', this.mouseDown);
+    window.removeEventListener('mousemove', this.mouseMove);
+    window.removeEventListener('mouseup', this.mouseUp);    
   }
 }
 </script>
 
 <style lang="less">
 .app-draggable-box {
-  position: absolute;
+  user-select: none;
+  cursor: move;
 }
 </style>

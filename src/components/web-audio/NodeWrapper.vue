@@ -1,6 +1,5 @@
 <template>
-  <app-card :raised="true">
-    <h5>{{ audioNode.type }} (ID: {{ audioNode.id }})</h5>
+  <app-card :raised="true" :title="audioNode.id + ': ' + audioNode.type">
     <v-divider></v-divider>
     <slot></slot>
     <v-select label="out" type="text" v-model="destination" :items="items" dark>
