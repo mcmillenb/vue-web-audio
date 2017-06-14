@@ -1,10 +1,19 @@
 <template>
   <node-wrapper :audio-node="audioNode">
     <div class="options">
-      <v-text-field label="frequency" type="number" v-model.number="frequency" dark>
-      </v-text-field>
-      <v-text-field label="detune" type="number" v-model.number="detune" dark>
-      </v-text-field>
+      <wg-dial 
+        v-model.number="frequency" 
+        label="freq" 
+        :min="0" 
+        :max="1000"
+      ></wg-dial>
+      <wg-dial 
+        v-model.number="detune" 
+        label="detune"
+        :min="-1000"
+        :max="1000"
+      ></wg-dial>
+
       <v-select label="type" type="text" v-model="type" :items="typeOpts" dark>
       </v-select>
     </div>
@@ -75,10 +84,6 @@ export default {
 </script>
 
 <style scoped> 
-.app-card {
-  width: 300px;
-}
-
 .input-group {
   margin: 20px 10px;
 }

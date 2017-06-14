@@ -1,6 +1,7 @@
 <template>
-  <div class="wg-dial">
+  <div class="wg-dial" :class="{ 'wg-dial--dragging': dragging }">
     <canvas ref="canvas" :width="size" :height="size"></canvas>
+    <div class="wg-dial__label">{{ label }}</div>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ export default {
     size: { type: Number, default: 32 },
     min: { type: Number, default: 0 },
     max: { type: Number, default: 100 },
+    label: { type: String, default: '' },
   },
   data() {
     return {
@@ -19,6 +21,7 @@ export default {
       requestAnimationFrame: null,   
       tween: 0,
       fillVal: this.value,
+      dragging: false,
     }
   },
   methods: {
@@ -45,10 +48,12 @@ export default {
     },
     startDrag(event) {
       if (event.target === this.$refs.canvas) {      
+        this.dragging = true;
         window.addEventListener('mousemove', this.dragValue);
       }
     },
     stopDrag(event) {
+      this.dragging = false;
       window.removeEventListener('mousemove', this.dragValue);
     },
     dragValue(event) {
@@ -91,5 +96,19 @@ export default {
 <style lang="less">
 .wg-dial {
   canvas { cursor: ne-resize; }
+
+  &:hover, &:focus, &--dragging {
+    .wg-dial__label {
+      color: #03A9F4;
+    }
+  }
+
+  margin: 5px;
+}
+
+.wg-dial__label {
+  text-align: center;
+  color: grey;
+  transition: color .3s ease;
 }
 </style>

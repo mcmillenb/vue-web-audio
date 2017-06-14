@@ -1,8 +1,7 @@
 <template>
   <node-wrapper :audio-node="audioNode">
     <div class="options">
-      <v-text-field label="gain" type="number" :min="0" :max="100" v-model.number="gain" dark>
-      </v-text-field>
+      <wg-dial v-model.number="gain" label="gain"></wg-dial>
     </div>
   </node-wrapper>
 </template>
