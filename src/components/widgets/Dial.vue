@@ -38,7 +38,7 @@ export default {
       context.beginPath();
       context.arc(size / 2, size / 2, 3 / 8 * size, start, end);
       context.lineWidth = size / 4;
-      context.strokeStyle = "#03A9F4";
+      context.strokeStyle = "#F9AE74";
       context.stroke();
 
       if (tween !== fillVal) {
@@ -99,7 +99,7 @@ export default {
 
   &:hover, &:focus, &--dragging {
     .wg-dial__label {
-      color: #03A9F4;
+      color: #F9AE74;
     }
   }
 

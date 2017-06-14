@@ -20,9 +20,10 @@ export default {
 .app-card {
   position: relative;
   background-color: white;
-  border: 2px solid #0a0a0a;
+  border: 2px solid #22202B;
   margin: 10px;
-  box-shadow: 2px 2px 2px rgba(0,0,0,.5);
+  box-shadow: 3px 1px 6px rgba(0,0,0,.5);
+  border-radius: 4px;
 }
 
 .app-card__dragger {
@@ -30,7 +31,7 @@ export default {
   min-height: 30px;
   padding: 5px;
   color: white;
-  background-color: #0a0a0a;
+  background-color: #22202B;
   text-transform: uppercase;
 }
 

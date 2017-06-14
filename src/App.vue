@@ -1,17 +1,9 @@
 <template>
-  <div id="app" class="green lighten-4">
-    <div class="container">
-      <component 
-        v-for="node in nodes" 
-        :key="node.id"
-        :ref="'node' + node.id"
-        :is="node.type" 
-        :audio-node="node"
-      ></component>
-
+  <div id="app">
+    <div id="sidebar">
       <div class="add-node">
         <v-menu offset-y>
-          <v-btn primary light slot="activator">Add Node</v-btn>
+          <v-btn light slot="activator"><icon class="material-icons">add</icon></v-btn>
           <v-list>
             <v-list-item 
               v-for="name in nodeNames" 
@@ -25,6 +17,15 @@
           </v-list>
         </v-menu>
       </div>
+    </div>
+    <div id="sandbox">
+      <component 
+        v-for="node in nodes" 
+        :key="node.id"
+        :ref="'node' + node.id"
+        :is="node.type" 
+        :audio-node="node"
+      ></component>
     </div>
   </div>
 </template>
@@ -60,7 +61,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
 body {
   font-family: arial;
 }
@@ -69,6 +70,27 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+#sidebar {
+  position: relative;
+  width: 240px;
+  height: 100%;
+  background-color: #CA8D6E;
+  box-shadow: 3px 1px 6px rgba(0,0,0,.2);
+  z-index: 2;
+
+  .btn {
+    background-color: #F9AE74;
+    color: #383745;
+  }
+}
+
+#sandbox {
+  background-color: #7D6962;
+  width: 100%;
 }
 
 .container {
