@@ -1,7 +1,15 @@
 <template>
   <div class="wg-dial" :class="{ 'wg-dial--dragging': dragging }">
-    <canvas ref="canvas" :width="size" :height="size"></canvas>
-    <div class="wg-dial__label">{{ label }}</div>
+    <canvas 
+      class="wg-dial__canvas" 
+      ref="canvas" 
+      :width="size" 
+      :height="size"
+    ></canvas>
+    <div class="wg-dial__info">
+      <div class="wg-dial__label">{{ label }}</div>
+      <div class="wg-dial__value">{{ value }}</div>
+    </div>
   </div>
 </template>
 
@@ -24,13 +32,18 @@ export default {
       dragging: false,
     }
   },
+  computed: {
+    range() {
+      return this.max - this.min;
+    }
+  },
   methods: {
     drawArc() {
-      let { context, size, fillVal, tween, min, max } = this;
+      let { context, size, fillVal, tween, range } = this;
 
       let incr = Math.ceil(Math.abs((fillVal - tween) / 8)); 
       tween = (tween < fillVal) ? tween + incr : tween - incr;
-      let percent = tween / (max - min);
+      let percent = tween / range;
       let start = Math.PI / 2;
       let end = Math.PI * 2 * percent + Math.PI / 2;
  
@@ -57,7 +70,8 @@ export default {
       window.removeEventListener('mousemove', this.dragValue);
     },
     dragValue(event) {
-      this.fillVal += Math.floor((event.movementX - event.movementY) / 2);
+      let factor = this.range / 200;
+      this.fillVal += Math.floor((event.movementX - event.movementY) * factor);
     },
     updateFillVal(value) {
       this.fillVal = Math.max(Math.min(value, this.max), this.min);
@@ -95,20 +109,30 @@ export default {
 
 <style lang="less">
 .wg-dial {
-  canvas { cursor: ne-resize; }
+  margin: 5px;
 
   &:hover, &:focus, &--dragging {
-    .wg-dial__label {
+    .wg-dial__label, .wg-dial__value {
       color: #F9AE74;
     }
   }
+}
 
-  margin: 5px;
+.wg-dial__canvas {
+  cursor: ne-resize;
+  margin-right: 5px;
+}
+
+.wg-dial__info {
+  display: inline-block;
+}
+
+.wg-dial__label, .wg-dial__value {
+  color: grey;
+  transition: color .3s ease;
 }
 
 .wg-dial__label {
-  text-align: center;
-  color: grey;
-  transition: color .3s ease;
+  font-size: 10px;
 }
 </style>
