@@ -39,11 +39,11 @@ export default {
   },
   methods: {
     drawArc() {
-      let { context, size, fillVal, tween, range } = this;
+      let { context, size, fillVal, tween, min, range } = this;
 
       let incr = Math.ceil(Math.abs((fillVal - tween) / 8)); 
       tween = (tween < fillVal) ? tween + incr : tween - incr;
-      let percent = tween / range;
+      let percent = (tween - min) / (range);
       let start = Math.PI / 2;
       let end = Math.PI * 2 * percent + Math.PI / 2;
  
