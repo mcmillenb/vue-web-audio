@@ -1,21 +1,29 @@
 <template>
   <node-wrapper :audio-node="audioNode">
     <div class="options">
-      <wg-dial 
-        v-model.number="frequency" 
-        label="freq" 
-        :min="0" 
-        :max="1000"
-      ></wg-dial>
-      <wg-dial 
-        v-model.number="detune" 
-        label="detune"
-        :min="-1000"
-        :max="1000"
-      ></wg-dial>
-
-      <v-select label="type" type="text" v-model="type" :items="typeOpts" dark>
-      </v-select>
+      <div>
+        <wg-dial 
+          v-model.number="frequency" 
+          label="freq" 
+          :min="0" 
+          :max="1000"
+        ></wg-dial>
+        <wg-dial 
+          v-model.number="detune" 
+          label="detune"
+          :min="-1000"
+          :max="1000"
+        ></wg-dial>
+      </div>
+      <div>
+        <v-select
+          label="type" 
+          type="text" 
+          v-model="type" 
+          :items="typeOpts" 
+          dark
+        ></v-select>
+      </div>
     </div>
   </node-wrapper>
 </template>
@@ -67,7 +75,7 @@ export default {
     }
   },
   watch: {
-    frequency(value) {                                                                            
+    frequency(value) {                                             
       this._instance.frequency.value = value;
     },
     detune(value) {
@@ -83,13 +91,14 @@ export default {
 }
 </script>
 
-<style scoped> 
+<style lang="less"> 
 .input-group {
   margin: 20px 10px;
 }
 
-.options {
-  display: flex;
-  justify-content: center;
+.options > div {
+  > * { float: left; }
+
+  padding-bottom: 8px;
 }
 </style>

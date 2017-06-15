@@ -60,16 +60,12 @@ export default {
 </script>
 
 <style scoped> 
-.app-card {
-  width: 300px;
-}
-
 .input-group {
   margin-left: 10px;
 }
 
 .options {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 </style>
