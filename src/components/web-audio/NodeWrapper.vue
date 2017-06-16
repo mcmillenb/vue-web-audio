@@ -2,8 +2,12 @@
   <app-card :raised="true" :title="audioNode.id + ': ' + audioNode.type">
     <v-divider></v-divider>
     <slot></slot>
-    <v-select label="out" type="text" v-model="destination" :items="items" dark>
-    </v-select>
+    <div slot="footer" class="node-wrapper__footer">
+      <div>
+        <icon class="material-icons">remove_circle_outline</icon>
+        <icon class="material-icons">add_circle_outline</icon>
+      </div>
+    </div>
   </app-card>
 </template>
 
@@ -30,3 +34,18 @@ export default {
   }
 }
 </script>
+
+<style lang="less">
+.node-wrapper__footer {
+  width: 100%;
+  display: block;
+
+  > div { 
+    display: flex;
+    padding: 4px;
+    justify-content: space-between;
+
+    .material-icons { color: rgba(0,0,0,.2); } 
+  }
+}
+</style>
