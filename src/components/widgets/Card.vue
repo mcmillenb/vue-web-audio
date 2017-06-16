@@ -4,6 +4,9 @@
     <div class="app-card__content">
       <slot></slot>
     </div>
+    <div class="app-card__footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -36,7 +39,14 @@ export default {
 }
 
 .app-card__content {
+  position: relative;
+  width: 100%;
+  overflow: visible;
   padding: 10px;
   user-select: none;
+}
+
+.app-card__footer {
+  padding: 4px 8px;
 }
 </style>

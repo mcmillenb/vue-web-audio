@@ -97,8 +97,19 @@ export default {
 }
 
 .options > div {
-  > * { float: left; }
-
+  width: 100%;
+  position: relative;
   padding-bottom: 8px;
+
+  .input-group--select { 
+    width: 100%; 
+    height: 28px;
+    padding: 0 8px;
+    margin: 10px 0;
+
+    label { padding: 6px 8px; }
+  }
+
+  > * { float: left; }
 }
 </style>
